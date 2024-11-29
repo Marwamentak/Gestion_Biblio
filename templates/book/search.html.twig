@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de livres{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la recherche pour "{{ query }}"</h1>
+
+    {% if books is empty %}
+        <p>Aucun livre trouvé.</p>
+    {% else %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <strong>{{ book.title }}</strong> - {{ book.author }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{{ path('books_index') }}">Retour à la liste des livres</a>
+{% endblock %}

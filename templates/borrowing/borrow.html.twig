@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunter un livre{% endblock %}
+
+{% block body %}
+    <h1>Emprunter le livre "{{ book.titre }}"</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nomEtudiant) }}
+        {{ form_row(form.prenomEtudiant) }}
+        {{ form_row(form.numCarteEtudiant) }}
+        {{ form_row(form.telephoneEtudiant) }}
+        
+        <button class="btn btn-primary">{{ form.save.vars.label }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('books_index') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+{% endblock %}

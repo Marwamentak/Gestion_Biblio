@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5">
+    <h1>Bienvenue sur BiblioVerse</h1>
+    <p>Votre bibliothèque locale, réinventée pour être à portée de clic.</p>
+
+    <div class="mt-4">
+        <!-- Bouton vers la page Sign Up -->
+        <a href="{{ path('signup') }}" class="btn btn-primary mx-2">Sign Up</a>
+
+        <!-- Bouton vers la page Sign In -->
+        <a href="{{ path('signin') }}" class="btn btn-secondary mx-2">Sign In</a>
+
+        <!-- Bouton vers la page Contact -->
+        <a href="{{ path('home_contact') }}" class="btn btn-info mx-2">Contact</a>
+    </div>
+</div>
+{% endblock %}

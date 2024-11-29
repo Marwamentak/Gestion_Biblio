@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le livre{% endblock %}
+
+{% block body %}
+    <h1>Modifier le livre</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.isbn) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.etat) }}
+        {{ form_row(form.editeur) }}
+        {{ form_row(form.anneeEdition) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}

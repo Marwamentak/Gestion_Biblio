@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres{% endblock %}
+
+{% block body %}
+    <h1>Liste des livres</h1>
+
+    {# Affichage des livres sous forme de tableau #}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>ISBN</th>
+                <th>Type</th>
+                <th>Éditeur</th>
+                <th>Année d'édition</th>
+                <th>État</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.titre }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.type.value | capitalize }}</td>  {# Affiche le type en utilisant la valeur de l'énumération #}
+                    <td>{{ book.editeur }}</td>
+                    <td>{{ book.anneeEdition }}</td>
+                    <td>{{ book.etat == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
+                    <td>
+                        {# Ajouter des boutons ou liens pour les actions (voir, emprunter, modifier, etc.) #}
+                        <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">Modifier</a>
+                        
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun livre trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# Lien pour ajouter un nouveau livre #}
+    <a href="{{ path('add_book') }}" class="btn btn-success">Ajouter un livre</a>
+
+    
+    
+{% endblock %}

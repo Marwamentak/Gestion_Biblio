@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les livres{% endblock %}
+
+{% block body %}
+    <h1>Tous les livres disponibles</h1>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <strong>{{ book.title }}</strong> - {{ book.author }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('books_search') }}">Rechercher un livre</a>
+{% endblock %}

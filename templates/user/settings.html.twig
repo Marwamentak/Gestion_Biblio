@@ -1,0 +1,20 @@
+{# templates/user/settings.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres du compte{% endblock %}
+
+{% block body %}
+    <h1>Paramètres du compte</h1>
+
+    {% if app.user %}
+        <p><strong>Nom :</strong> {{ app.user.name }}</p>
+        <p><strong>Prénom :</strong> {{ app.user.surname }}</p>
+        <p><strong>Email :</strong> {{ app.user.email }}</p>
+        <p><strong>CIN :</strong> {{ app.user.cin }}</p>
+        <p><strong>Date de naissance :</strong> {{ app.user.dateOfBirth|date('d/m/Y') }}</p>
+        
+        <a href="{{ path('home') }}">Retour à la page d'accueil</a>
+    {% else %}
+        <p>Vous devez être connecté pour accéder à cette page.</p>
+    {% endif %}
+{% endblock %}

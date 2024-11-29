@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes emprunts{% endblock %}
+
+{% block body %}
+    <h1>Mes emprunts</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre du livre</th>
+                <th>Date d'emprunt</th>
+                <th>Date de retour</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrowing in borrowings %}
+                <tr>
+                    <td>{{ borrowing.id }}</td>
+                    <td>{{ borrowing.book.titre }}</td>
+                    <td>{{ borrowing.borrowDate|date('d/m/Y') }}</td>
+                    <td>{{ borrowing.returnDate ? borrowing.returnDate|date('d/m/Y') : 'Non retourné' }}</td>
+                    <td>
+                        {% if borrowing.returnDate is null %}
+                            <a href="{{ path('return', {'id': borrowing.id}) }}" class="btn btn-success">Retourner le livre</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun emprunt en cours.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('books_index') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+{% endblock %}

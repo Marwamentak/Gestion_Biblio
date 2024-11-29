@@ -1,0 +1,15 @@
+{# templates/borrowing/return.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Retourner un Livre{% endblock %}
+
+{% block body %}
+    <h1>Retourner le Livre</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.return) }}
+    {{ form_end(form) }}
+
+    <p><a href="{{ path('borrowings') }}">Retour à l'historique des emprunts</a></p>
+{% endblock %}
