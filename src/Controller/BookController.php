@@ -49,7 +49,15 @@ class BookController extends AbstractController
     {
         // Récupérer la liste des livres depuis la base de données
         $books = $entityManager->getRepository(Book::class)->findAll();
-
+        /*
+        $results = [];
+        foreach($books => $book) {
+            $results[] = [
+                'id' => $book->getId();
+                'titre' => $book->get
+            ]
+        }
+        */
         // Afficher les livres dans la vue
         return $this->render('book/list.html.twig', [
             'books' => $books,
@@ -80,5 +88,23 @@ class BookController extends AbstractController
             'book' => $book,
         ]);
     }
+
+    #[Route('/book/delete/{id}', name: 'delete_book', methods: ['POST', 'GET'])]
+        public function deleteBook(int $id, EntityManagerInterface $entityManager): Response
+        {
+            $book = $entityManager->getRepository(Book::class)->find($id);
+
+            if (!$book) {
+                throw $this->createNotFoundException('Livre introuvable.');
+            }
+
+            $entityManager->remove($book);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le livre a été supprimé avec succès.');
+
+            return $this->redirectToRoute('book_list');
+        }
+
 
 }

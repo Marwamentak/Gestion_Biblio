@@ -32,6 +32,13 @@
                         <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">Modifier</a>
                         
                     </td>
+                    <td>
+                        
+                        <form method="post" action="{{ path('delete_book', {'id': book.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                    
                 </tr>
             {% else %}
                 <tr>
