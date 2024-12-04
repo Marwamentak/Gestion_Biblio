@@ -26,12 +26,7 @@ class BookType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'label' => 'Type',
-                /*
-                'choices' => [
-                    'Livre' => BooksType::LIVRE->value, // Utilisation de la valeur de l'énumération
-                    'Dictionnaire' => BooksType::DICTIONNAIRE->value,
-                    'Magazine' => BooksType::MAGAZINE->value,
-                ],*/
+                
                 'choices' => BooksType::cases(), // Utilisation des cas directement
                 'choice_label' => function (BooksType $choice) {
                     // Affiche le label (par exemple, 'Livre', 'Dictionnaire')

@@ -20,10 +20,16 @@
                 <tr>
                     <td>{{ borrowing.id }}</td>
                     <td>{{ borrowing.book.titre }}</td>
-                    <td>{{ borrowing.borrowDate|date('d/m/Y') }}</td>
-                    <td>{{ borrowing.returnDate ? borrowing.returnDate|date('d/m/Y') : 'Non retourné' }}</td>
+                    <td>{{ borrowing.dateEmprunt ? borrowing.dateEmprunt|date('d/m/Y') : 'Non définie' }}</td>
                     <td>
-                        {% if borrowing.returnDate is null %}
+                        {% if borrowing.dateRetour is not null %}
+                            {{ borrowing.dateRetour|date('d/m/Y') }}
+                        {% else %}
+                            Non retourné
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if borrowing.dateRetour is null %}
                             <a href="{{ path('return', {'id': borrowing.id}) }}" class="btn btn-success">Retourner le livre</a>
                         {% endif %}
                     </td>
@@ -36,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('books_index') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+    <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste des livres</a>
 {% endblock %}

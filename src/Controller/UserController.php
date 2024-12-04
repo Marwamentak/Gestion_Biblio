@@ -46,13 +46,24 @@ class UserController extends AbstractController
     #[Route('/signin', name: 'signin')]
     public function signIn(AuthenticationUtils $authenticationUtils): Response
     {
+    
+        if ($this->getUser()) {
+            return $this->redirectToRoute('book_list'); 
+        }
+        
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+
+       
         return $this->render('user/signin.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+
+        
+    
     }
 
     // Déconnexion de l'utilisateur

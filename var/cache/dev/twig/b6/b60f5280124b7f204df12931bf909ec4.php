@@ -121,19 +121,30 @@ class __TwigTemplate_44ddbfcee760d0195e9a6fbc98dc5a8d extends Template
         // line 12
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), "telephoneEtudiant", [], "any", false, false, false, 12), 'row');
         yield "
-        
-        <button class=\"btn btn-primary\">";
+        ";
+        // line 13
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), "dateEmprunt", [], "any", false, false, false, 13), 'row');
+        yield "
+        ";
         // line 14
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), "save", [], "any", false, false, false, 14), "vars", [], "any", false, false, false, 14), "label", [], "any", false, false, false, 14), "html", null, true);
-        yield "</button>
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), "dateRetour", [], "any", false, false, false, 14), 'row');
+        yield "
+         ";
+        // line 16
+        yield "         ";
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 16, $this->source); })()), "etat_retour", [], "any", false, false, false, 16), 'row');
+        yield "
+
+        <button type=\"submit\" class=\"btn btn-danger\">enregistrer</button>
+        
     ";
-        // line 15
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), 'form_end');
+        // line 20
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_end');
         yield "
 
     <a href=\"";
-        // line 17
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("books_index");
+        // line 22
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("book_list");
         yield "\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
 ";
         
@@ -166,7 +177,7 @@ class __TwigTemplate_44ddbfcee760d0195e9a6fbc98dc5a8d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  136 => 17,  131 => 15,  127 => 14,  122 => 12,  118 => 11,  114 => 10,  110 => 9,  106 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  147 => 22,  142 => 20,  134 => 16,  130 => 14,  126 => 13,  122 => 12,  118 => 11,  114 => 10,  110 => 9,  106 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -183,11 +194,16 @@ class __TwigTemplate_44ddbfcee760d0195e9a6fbc98dc5a8d extends Template
         {{ form_row(form.prenomEtudiant) }}
         {{ form_row(form.numCarteEtudiant) }}
         {{ form_row(form.telephoneEtudiant) }}
+        {{ form_row(form.dateEmprunt) }}
+        {{ form_row(form.dateRetour) }}
+         {# Afficher le champ 'etat_retour' comme un choix #}
+         {{ form_row(form.etat_retour) }}
+
+        <button type=\"submit\" class=\"btn btn-danger\">enregistrer</button>
         
-        <button class=\"btn btn-primary\">{{ form.save.vars.label }}</button>
     {{ form_end(form) }}
 
-    <a href=\"{{ path('books_index') }}\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
+    <a href=\"{{ path('book_list') }}\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
 {% endblock %}
 ", "borrowing/borrow.html.twig", "C:\\Users\\marwa\\biblioverse\\templates\\borrowing\\borrow.html.twig");
     }

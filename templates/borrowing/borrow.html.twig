@@ -10,9 +10,14 @@
         {{ form_row(form.prenomEtudiant) }}
         {{ form_row(form.numCarteEtudiant) }}
         {{ form_row(form.telephoneEtudiant) }}
+        {{ form_row(form.dateEmprunt) }}
+        {{ form_row(form.dateRetour) }}
+         {# Afficher le champ 'etat_retour' comme un choix #}
+         {{ form_row(form.etat_retour) }}
+
+        <button type="submit" class="btn btn-danger">enregistrer</button>
         
-        <button class="btn btn-primary">{{ form.save.vars.label }}</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('books_index') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+    <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste des livres</a>
 {% endblock %}

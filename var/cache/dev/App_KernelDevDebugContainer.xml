@@ -465,7 +465,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.miHa5yn"/>
+      <argument type="service" id=".service_locator.Y01gEBA"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3370,7 +3370,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.miHa5yn"/>
+      <argument type="service" id=".service_locator.Y01gEBA"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7807,6 +7807,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.fq4bKpU" method="withContext"/>
     </service>
+    <service id=".service_locator.P.blNFL.App\Controller\BorrowingController::listBorrowings()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\BorrowingController::listBorrowings()"/>
+      <argument>App\Controller\BorrowingController::listBorrowings()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.P.blNFL" method="withContext"/>
+    </service>
     <service id=".service_locator.iHNdZ5r" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7832,7 +7838,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.mSaexrr" method="withContext"/>
     </service>
-    <service id=".service_locator.miHa5yn" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Y01gEBA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -7846,6 +7852,7 @@
         <argument key="App\Controller\BookController::editBook" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BookController::editBook()"/>
         <argument key="App\Controller\BookController::deleteBook" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BookController::deleteBook()"/>
         <argument key="App\Controller\BorrowingController::borrow" type="service_closure" id=".service_locator.fq4bKpU.App\Controller\BorrowingController::borrow()"/>
+        <argument key="App\Controller\BorrowingController::listBorrowings" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BorrowingController::listBorrowings()"/>
         <argument key="App\Controller\BorrowingController::returnBook" type="service_closure" id=".service_locator.iHNdZ5r.App\Controller\BorrowingController::returnBook()"/>
         <argument key="App\Controller\HistoryController::index" type="service_closure" id=".service_locator.mSaexrr.App\Controller\HistoryController::index()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
@@ -7857,6 +7864,7 @@
         <argument key="App\Controller\BookController:editBook" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BookController::editBook()"/>
         <argument key="App\Controller\BookController:deleteBook" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BookController::deleteBook()"/>
         <argument key="App\Controller\BorrowingController:borrow" type="service_closure" id=".service_locator.fq4bKpU.App\Controller\BorrowingController::borrow()"/>
+        <argument key="App\Controller\BorrowingController:listBorrowings" type="service_closure" id=".service_locator.P.blNFL.App\Controller\BorrowingController::listBorrowings()"/>
         <argument key="App\Controller\BorrowingController:returnBook" type="service_closure" id=".service_locator.iHNdZ5r.App\Controller\BorrowingController::returnBook()"/>
         <argument key="App\Controller\HistoryController:index" type="service_closure" id=".service_locator.mSaexrr.App\Controller\HistoryController::index()"/>
       </argument>
@@ -9994,7 +10002,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.miHa5yn"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Y01gEBA"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>

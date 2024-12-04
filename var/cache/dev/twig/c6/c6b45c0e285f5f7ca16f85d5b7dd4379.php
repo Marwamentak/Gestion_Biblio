@@ -128,30 +128,42 @@ class __TwigTemplate_255f118eff8109fcc20752c442047de2 extends Template
             yield "</td>
                     <td>";
             // line 23
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "borrowDate", [], "any", false, false, false, 23), "d/m/Y"), "html", null, true);
-            yield "</td>
-                    <td>";
-            // line 24
-            ((CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "returnDate", [], "any", false, false, false, 24)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "returnDate", [], "any", false, false, false, 24), "d/m/Y"), "html", null, true)) : (yield "Non retourné"));
+            ((CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "dateEmprunt", [], "any", false, false, false, 23)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "dateEmprunt", [], "any", false, false, false, 23), "d/m/Y"), "html", null, true)) : (yield "Non définie"));
             yield "</td>
                     <td>
                         ";
-            // line 26
-            if ((null === CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "returnDate", [], "any", false, false, false, 26))) {
-                // line 27
+            // line 25
+            if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "dateRetour", [], "any", false, false, false, 25))) {
+                // line 26
+                yield "                            ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "dateRetour", [], "any", false, false, false, 26), "d/m/Y"), "html", null, true);
+                yield "
+                        ";
+            } else {
+                // line 28
+                yield "                            Non retourné
+                        ";
+            }
+            // line 30
+            yield "                    </td>
+                    <td>
+                        ";
+            // line 32
+            if ((null === CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "dateRetour", [], "any", false, false, false, 32))) {
+                // line 33
                 yield "                            <a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("return", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "id", [], "any", false, false, false, 27)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("return", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "id", [], "any", false, false, false, 33)]), "html", null, true);
                 yield "\" class=\"btn btn-success\">Retourner le livre</a>
                         ";
             }
-            // line 29
+            // line 35
             yield "                    </td>
                 </tr>
             ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 32
+            // line 38
             yield "                <tr>
                     <td colspan=\"5\">Aucun emprunt en cours.</td>
                 </tr>
@@ -160,13 +172,13 @@ class __TwigTemplate_255f118eff8109fcc20752c442047de2 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['borrowing'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
+        // line 42
         yield "        </tbody>
     </table>
 
     <a href=\"";
-        // line 39
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("books_index");
+        // line 45
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("book_list");
         yield "\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
 ";
         
@@ -199,7 +211,7 @@ class __TwigTemplate_255f118eff8109fcc20752c442047de2 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  169 => 39,  164 => 36,  155 => 32,  148 => 29,  142 => 27,  140 => 26,  135 => 24,  131 => 23,  127 => 22,  123 => 21,  120 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  181 => 45,  176 => 42,  167 => 38,  160 => 35,  154 => 33,  152 => 32,  148 => 30,  144 => 28,  138 => 26,  136 => 25,  131 => 23,  127 => 22,  123 => 21,  120 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -226,10 +238,16 @@ class __TwigTemplate_255f118eff8109fcc20752c442047de2 extends Template
                 <tr>
                     <td>{{ borrowing.id }}</td>
                     <td>{{ borrowing.book.titre }}</td>
-                    <td>{{ borrowing.borrowDate|date('d/m/Y') }}</td>
-                    <td>{{ borrowing.returnDate ? borrowing.returnDate|date('d/m/Y') : 'Non retourné' }}</td>
+                    <td>{{ borrowing.dateEmprunt ? borrowing.dateEmprunt|date('d/m/Y') : 'Non définie' }}</td>
                     <td>
-                        {% if borrowing.returnDate is null %}
+                        {% if borrowing.dateRetour is not null %}
+                            {{ borrowing.dateRetour|date('d/m/Y') }}
+                        {% else %}
+                            Non retourné
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if borrowing.dateRetour is null %}
                             <a href=\"{{ path('return', {'id': borrowing.id}) }}\" class=\"btn btn-success\">Retourner le livre</a>
                         {% endif %}
                     </td>
@@ -242,7 +260,7 @@ class __TwigTemplate_255f118eff8109fcc20752c442047de2 extends Template
         </tbody>
     </table>
 
-    <a href=\"{{ path('books_index') }}\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
+    <a href=\"{{ path('book_list') }}\" class=\"btn btn-secondary\">Retour à la liste des livres</a>
 {% endblock %}
 ", "borrowing/index.html.twig", "C:\\Users\\marwa\\biblioverse\\templates\\borrowing\\index.html.twig");
     }

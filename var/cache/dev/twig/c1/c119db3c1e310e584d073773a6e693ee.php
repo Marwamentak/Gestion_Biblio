@@ -140,11 +140,11 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
             yield "</td>
                     <td>";
             // line 28
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["book"], "anneeEdition", [], "any", false, false, false, 28), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["book"], "annee_edition", [], "any", false, false, false, 28), "html", null, true);
             yield "</td>
                     <td>";
             // line 29
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["book"], "etat", [], "any", false, false, false, 29) == "disponible")) ? ("Disponible") : ("Emprunté"));
+            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["book"], "etat", [], "any", false, false, false, 29), "value", [], "any", false, false, false, 29) == "disponible")) ? ("Disponible") : ("Emprunté"));
             yield "</td>  ";
             // line 30
             yield "                    <td>
@@ -164,13 +164,30 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
                             <button type=\"submit\" class=\"btn btn-danger\">Supprimer</button>
                         </form>
                     </td>
+                    <td>
+                        <!-- Bouton Borrow (Emprunter) -->
+                        ";
+            // line 43
+            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["book"], "etat", [], "any", false, false, false, 43), "value", [], "any", false, false, false, 43) == "disponible")) {
+                // line 44
+                yield "                            <a href=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("borrow", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["book"], "id", [], "any", false, false, false, 44)]), "html", null, true);
+                yield "\" class=\"btn btn-primary\">Emprunter</a>
+                        ";
+            } else {
+                // line 46
+                yield "                            <span>Ce livre est déjà emprunté</span>
+                        ";
+            }
+            // line 48
+            yield "                    </td>
                     
                 </tr>
             ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 44
+            // line 52
             yield "                <tr>
                     <td colspan=\"7\">Aucun livre trouvé.</td>
                 </tr>
@@ -179,12 +196,12 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['book'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 48
+        // line 56
         yield "        </tbody>
     </table>
 
     ";
-        // line 52
+        // line 60
         yield "    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_book");
         yield "\" class=\"btn btn-success\">Ajouter un livre</a>
@@ -222,7 +239,7 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  188 => 52,  183 => 48,  174 => 44,  162 => 37,  153 => 32,  150 => 30,  147 => 29,  143 => 28,  138 => 27,  135 => 26,  131 => 25,  127 => 24,  124 => 23,  119 => 22,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  205 => 60,  200 => 56,  191 => 52,  183 => 48,  179 => 46,  173 => 44,  171 => 43,  162 => 37,  153 => 32,  150 => 30,  147 => 29,  143 => 28,  138 => 27,  135 => 26,  131 => 25,  127 => 24,  124 => 23,  119 => 22,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -254,8 +271,8 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
                     <td>{{ book.isbn }}</td>
                     <td>{{ book.type.value | capitalize }}</td>  {# Affiche le type en utilisant la valeur de l'énumération #}
                     <td>{{ book.editeur }}</td>
-                    <td>{{ book.anneeEdition }}</td>
-                    <td>{{ book.etat == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
+                    <td>{{ book.annee_edition }}</td>
+                    <td>{{ book.etat.value == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
                     <td>
                         {# Ajouter des boutons ou liens pour les actions (voir, emprunter, modifier, etc.) #}
                         <a href=\"{{ path('edit_book', {'id': book.id}) }}\" class=\"btn btn-primary\">Modifier</a>
@@ -266,6 +283,14 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
                         <form method=\"post\" action=\"{{ path('delete_book', {'id': book.id}) }}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');\" style=\"display:inline;\">
                             <button type=\"submit\" class=\"btn btn-danger\">Supprimer</button>
                         </form>
+                    </td>
+                    <td>
+                        <!-- Bouton Borrow (Emprunter) -->
+                        {% if book.etat.value == 'disponible' %}
+                            <a href=\"{{ path('borrow', {'id': book.id}) }}\" class=\"btn btn-primary\">Emprunter</a>
+                        {% else %}
+                            <span>Ce livre est déjà emprunté</span>
+                        {% endif %}
                     </td>
                     
                 </tr>

@@ -25,8 +25,8 @@
                     <td>{{ book.isbn }}</td>
                     <td>{{ book.type.value | capitalize }}</td>  {# Affiche le type en utilisant la valeur de l'énumération #}
                     <td>{{ book.editeur }}</td>
-                    <td>{{ book.anneeEdition }}</td>
-                    <td>{{ book.etat == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
+                    <td>{{ book.annee_edition }}</td>
+                    <td>{{ book.etat.value == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
                     <td>
                         {# Ajouter des boutons ou liens pour les actions (voir, emprunter, modifier, etc.) #}
                         <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">Modifier</a>
@@ -37,6 +37,14 @@
                         <form method="post" action="{{ path('delete_book', {'id': book.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');" style="display:inline;">
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
+                    </td>
+                    <td>
+                        <!-- Bouton Borrow (Emprunter) -->
+                        {% if book.etat.value == 'disponible' %}
+                            <a href="{{ path('borrow', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
+                        {% else %}
+                            <span>Ce livre est déjà emprunté</span>
+                        {% endif %}
                     </td>
                     
                 </tr>

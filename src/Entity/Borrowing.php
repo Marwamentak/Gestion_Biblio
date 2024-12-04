@@ -24,7 +24,7 @@ class Borrowing
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_retour = null;
 
-    #[ORM\Column(enumType: BorrowingState::class)]
+    #[ORM\Column(enumType: BorrowingState::class, nullable: true)]
     private ?BorrowingState $etat_retour = null;
 
     #[ORM\Column(length: 255)]

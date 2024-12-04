@@ -13,16 +13,10 @@ class HistoryController extends AbstractController
     #[Route('/history', name: 'history')]
     public function index(BorrowingRepository $borrowingRepository): Response
     {
-        // Récupérer l'utilisateur connecté
-        $user = $this->getUser();
-
-        if (!$user) {
-            // Rediriger vers la page de connexion si l'utilisateur n'est pas authentifié
-            return $this->redirectToRoute('signin');
-        }
+       
 
         // Récupérer les emprunts de l'utilisateur
-        $borrowings = $borrowingRepository->findBy(['user' => $user]);
+        $borrowings = $borrowingRepository->findAll();
 
         return $this->render('history/index.html.twig', [
             'borrowings' => $borrowings,

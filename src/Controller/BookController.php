@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends AbstractController
 {
+ 
     // Affichage et traitement du formulaire d'ajout de livre
     #[Route('/book/add', name: 'add_book')]
     public function addBook(Request $request, EntityManagerInterface $entityManager): Response
@@ -49,34 +50,45 @@ class BookController extends AbstractController
     {
         // Récupérer la liste des livres depuis la base de données
         $books = $entityManager->getRepository(Book::class)->findAll();
-        /*
+
+        // Préparer les données pour l'affichage (optionnel)
         $results = [];
-        foreach($books => $book) {
+        
+
+        foreach ($books as $book) {
             $results[] = [
-                'id' => $book->getId();
-                'titre' => $book->get
-            ]
+                'id' => $book->getId(),
+                'titre' => $book->getTitre(),
+                'isbn' => $book->getIsbn(),
+                'type' => $book->getType(),
+                'etat' => $book->getEtat(),
+                'editeur' => $book->getEditeur(),
+                'annee_edition' => $book->getAnneeEdition()
+            ];
         }
-        */
+
         // Afficher les livres dans la vue
         return $this->render('book/list.html.twig', [
-            'books' => $books,
+            'books' => $results, // Vous pouvez aussi passer directement `$books` si les données brutes suffisent
         ]);
     }
 
     #[Route('/book/edit/{id}', name: 'edit_book')]
     public function editBook(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Récupérer le livre à modifier
         $book = $entityManager->getRepository(Book::class)->find($id);
 
         if (!$book) {
             throw $this->createNotFoundException('Livre introuvable.');
         }
 
+        // Créer le formulaire pour l'édition
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Sauvegarder les modifications
             $entityManager->flush();
             $this->addFlash('success', 'Le livre a été modifié avec succès.');
 
@@ -90,21 +102,21 @@ class BookController extends AbstractController
     }
 
     #[Route('/book/delete/{id}', name: 'delete_book', methods: ['POST', 'GET'])]
-        public function deleteBook(int $id, EntityManagerInterface $entityManager): Response
-        {
-            $book = $entityManager->getRepository(Book::class)->find($id);
+    public function deleteBook(int $id, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer le livre à supprimer
+        $book = $entityManager->getRepository(Book::class)->find($id);
 
-            if (!$book) {
-                throw $this->createNotFoundException('Livre introuvable.');
-            }
-
-            $entityManager->remove($book);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le livre a été supprimé avec succès.');
-
-            return $this->redirectToRoute('book_list');
+        if (!$book) {
+            throw $this->createNotFoundException('Livre introuvable.');
         }
 
+        // Supprimer le livre
+        $entityManager->remove($book);
+        $entityManager->flush();
 
+        $this->addFlash('success', 'Le livre a été supprimé avec succès.');
+
+        return $this->redirectToRoute('book_list');
+    }
 }
