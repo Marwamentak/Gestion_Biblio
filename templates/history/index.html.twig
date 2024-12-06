@@ -21,11 +21,8 @@
                 </thead>
                 <tbody>
                     {% for borrowing in borrowings %}
-                        <tr>
-                            <td>{{ borrowing.book.title }}</td>
-                            <td>{{ borrowing.borrowDate|date('Y-m-d') }}</td>
-                            <td>{{ borrowing.returnDate ? borrowing.returnDate|date('Y-m-d') : 'Non retourné' }}</td>
-                        </tr>
+                        {{ dump(borrowing) }}
+                    
                     {% endfor %}
                 </tbody>
             </table>

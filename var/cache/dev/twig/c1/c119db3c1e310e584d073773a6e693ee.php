@@ -205,7 +205,10 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
         yield "    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_book");
         yield "\" class=\"btn btn-success\">Ajouter un livre</a>
-
+    <a href=\"";
+        // line 61
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("borrowings");
+        yield "\" class=\"btn btn-info\">Voir mes emprunts</a>
     
     
 ";
@@ -239,7 +242,7 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  205 => 60,  200 => 56,  191 => 52,  183 => 48,  179 => 46,  173 => 44,  171 => 43,  162 => 37,  153 => 32,  150 => 30,  147 => 29,  143 => 28,  138 => 27,  135 => 26,  131 => 25,  127 => 24,  124 => 23,  119 => 22,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  210 => 61,  205 => 60,  200 => 56,  191 => 52,  183 => 48,  179 => 46,  173 => 44,  171 => 43,  162 => 37,  153 => 32,  150 => 30,  147 => 29,  143 => 28,  138 => 27,  135 => 26,  131 => 25,  127 => 24,  124 => 23,  119 => 22,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -304,7 +307,7 @@ class __TwigTemplate_b51b7fe619fae06304f444f14334e3a1 extends Template
 
     {# Lien pour ajouter un nouveau livre #}
     <a href=\"{{ path('add_book') }}\" class=\"btn btn-success\">Ajouter un livre</a>
-
+    <a href=\"{{ path('borrowings') }}\" class=\"btn btn-info\">Voir mes emprunts</a>
     
     
 {% endblock %}

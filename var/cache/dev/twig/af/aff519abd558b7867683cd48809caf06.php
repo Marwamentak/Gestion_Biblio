@@ -125,31 +125,21 @@ class __TwigTemplate_43f07f81ac650c70810d87df6eaaf4bc extends Template
             $context['_seq'] = CoreExtension::ensureTraversable((isset($context["borrowings"]) || array_key_exists("borrowings", $context) ? $context["borrowings"] : (function () { throw new RuntimeError('Variable "borrowings" does not exist.', 23, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["borrowing"]) {
                 // line 24
-                yield "                        <tr>
-                            <td>";
-                // line 25
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "book", [], "any", false, false, false, 25), "title", [], "any", false, false, false, 25), "html", null, true);
-                yield "</td>
-                            <td>";
-                // line 26
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "borrowDate", [], "any", false, false, false, 26), "Y-m-d"), "html", null, true);
-                yield "</td>
-                            <td>";
-                // line 27
-                ((CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "returnDate", [], "any", false, false, false, 27)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["borrowing"], "returnDate", [], "any", false, false, false, 27), "Y-m-d"), "html", null, true)) : (yield "Non retourné"));
-                yield "</td>
-                        </tr>
+                yield "                        ";
+                yield $this->extensions['Symfony\Bridge\Twig\Extension\DumpExtension']->dump($this->env, $context, $context["borrowing"]);
+                yield "
+                    
                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['borrowing'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 30
+            // line 27
             yield "                </tbody>
             </table>
         ";
         }
-        // line 33
+        // line 30
         yield "    </div>
 ";
         
@@ -182,7 +172,7 @@ class __TwigTemplate_43f07f81ac650c70810d87df6eaaf4bc extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  153 => 33,  148 => 30,  139 => 27,  135 => 26,  131 => 25,  128 => 24,  124 => 23,  113 => 14,  107 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  143 => 30,  138 => 27,  128 => 24,  124 => 23,  113 => 14,  107 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -210,11 +200,8 @@ class __TwigTemplate_43f07f81ac650c70810d87df6eaaf4bc extends Template
                 </thead>
                 <tbody>
                     {% for borrowing in borrowings %}
-                        <tr>
-                            <td>{{ borrowing.book.title }}</td>
-                            <td>{{ borrowing.borrowDate|date('Y-m-d') }}</td>
-                            <td>{{ borrowing.returnDate ? borrowing.returnDate|date('Y-m-d') : 'Non retourné' }}</td>
-                        </tr>
+                        {{ dump(borrowing) }}
+                    
                     {% endfor %}
                 </tbody>
             </table>

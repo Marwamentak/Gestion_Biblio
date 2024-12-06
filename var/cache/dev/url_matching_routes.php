@@ -8,6 +8,10 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/logout' => [
+            [['_route' => '_logout_main'], null, null, null, false, false, null],
+            [['_route' => 'logout', '_controller' => 'App\\Controller\\UserController::logout'], null, null, null, false, false, null],
+        ],
         '/_profiler' => [[['_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'], null, null, null, true, false, null]],
         '/_profiler/search' => [[['_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'], null, null, null, false, false, null]],
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
@@ -22,7 +26,6 @@ return [
         '/contact' => [[['_route' => 'home_contact', '_controller' => 'App\\Controller\\HomeController::contact'], null, null, null, false, false, null]],
         '/signup' => [[['_route' => 'signup', '_controller' => 'App\\Controller\\UserController::signUp'], null, null, null, false, false, null]],
         '/signin' => [[['_route' => 'signin', '_controller' => 'App\\Controller\\UserController::signIn'], null, null, null, false, false, null]],
-        '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Controller\\UserController::logout'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
