@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '9e0743c6b4d722be96ddc07d8545a889c82633a4',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '0872046c69aa55e19c73fde6f9ff2ec1580b5d83',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '9e0743c6b4d722be96ddc07d8545a889c82633a4',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '0872046c69aa55e19c73fde6f9ff2ec1580b5d83',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1170,9 +1170,9 @@
             ),
         ),
         'symfony/stimulus-bundle' => array(
-            'pretty_version' => 'v2.21.0',
-            'version' => '2.21.0.0',
-            'reference' => 'e5f7747b514865719e0990389ce35a9b71bebb48',
+            'pretty_version' => 'v2.22.1',
+            'version' => '2.22.1.0',
+            'reference' => 'e13034d428354023c82a1db108d40fdf6cec2d36',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../symfony/stimulus-bundle',
             'aliases' => array(),
@@ -1300,6 +1300,15 @@
             'install_path' => __DIR__ . '/../symfony/web-profiler-bundle',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'symfony/webpack-encore-bundle' => array(
+            'pretty_version' => 'v2.2.0',
+            'version' => '2.2.0.0',
+            'reference' => 'e335394b68a775a9b2bd173a8ba4fd2001f3870c',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/webpack-encore-bundle',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/yaml' => array(
             'pretty_version' => 'v7.1.6',

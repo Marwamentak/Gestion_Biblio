@@ -2,17 +2,57 @@
 
 {% block title %}Ajouter un livre{% endblock %}
 
-{% block body %}
-    <h1>Ajouter un livre</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/homePage/style.css') }}">
+{% endblock %}
 
-    {# Affichage du formulaire d'ajout de livre #}
-    {{ form_start(form) }}
-        {{ form_row(form.titre) }}
-        {{ form_row(form.isbn) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.etat) }}
-        {{ form_row(form.editeur) }}
-        {{ form_row(form.anneeEdition) }}
-        {{ form_row(form.save) }}
-    {{ form_end(form) }}
+{% block body %}
+<header class="navbar" style="background-color: #ffc5c5; padding: 10px 20px;">
+    <div class="logo" style="display: inline-block;">
+        <span class="logo-icon" style="font-size: 1.5rem; color: #000;"></span>
+        <span class="logo-text" style="font-size: 1.5rem; font-weight: bold; color: #000;">BiblioVerse</span>
+    </div>
+    <nav style="display: inline-block; float: right;">
+        <a href="{{ path('home_contact') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Contact</a>
+        <a href="{{ path('signin') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Sign In</a>
+        <button class="signup-button" onclick="window.location.href='{{ path('signup') }}'" style="background-color: #000; color: #fff; border: none; padding: 10px 30px; cursor: pointer; font-size: 1rem; border-radius: 30px; transition: background-color 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            Sign Up
+        </button>
+    </nav>
+</header>
+
+<main class="admin-login-page" style="background-color: #ffc5c5; color: #333; display: flex; justify-content: center; padding: 40px; min-height: 80vh;">
+    <section class="login-form-container" style="width: 100%; max-width: 500px; background-color: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);">
+        <h1 style="text-align: center; color: #000; font-size: 2rem; margin-bottom: 10px;">Ajouter un livre</h1>
+        <p style="text-align: center; font-size: 1rem; color: #555; margin-bottom: 30px;">Entrez les informations du livre que vous souhaitez ajouter</p>
+
+        {{ form_start(form) }}
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.titre, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Titre du livre', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.isbn, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'ISBN', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.type, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Type de livre', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.etat, {'label': false, 'attr': {'class': 'form-input form-control', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.editeur, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Éditeur du livre', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.anneeEdition, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Année d\'édition', 'style': 'padding: 12px; font-size: 1rem; width: 80%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div style="width: 100%; text-align: center;">
+                {{ form_row(form.save, {'attr': {'class': 'btn btn-dark', 'style': 'background-color: #000; color: #fff; padding: 15px 20px; font-size: 1.1rem; border-radius: 30px; border: none; cursor: pointer; transition: background-color 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: 20px; width: 80%; margin: 0 auto;'}}) }}
+            </div>
+        {{ form_end(form) }}
+    </section>
+</main>
+
+<footer style="background-color: #fff; padding: 30px 0; text-align: center; margin-top: 50px; border-top: 1px solid #ccc;">
+    <p style="color: #000; font-size: 1rem; margin-top: 30px;">@biblioVerse 2024. All rights reserved.</p>
+</footer>
 {% endblock %}

@@ -48,6 +48,7 @@ class BookController extends AbstractController
     #[Route('/books', name: 'book_list')]
     public function listBooks(EntityManagerInterface $entityManager): Response
     {
+        //die();
         // Récupérer la liste des livres depuis la base de données
         $books = $entityManager->getRepository(Book::class)->findAll();
 
@@ -66,12 +67,14 @@ class BookController extends AbstractController
                 'annee_edition' => $book->getAnneeEdition()
             ];
         }
-
+        
         // Afficher les livres dans la vue
         return $this->render('book/list.html.twig', [
             'books' => $results, // Vous pouvez aussi passer directement `$books` si les données brutes suffisent
         ]);
+       
     }
+    
 
     #[Route('/book/edit/{id}', name: 'edit_book')]
     public function editBook(int $id, Request $request, EntityManagerInterface $entityManager): Response

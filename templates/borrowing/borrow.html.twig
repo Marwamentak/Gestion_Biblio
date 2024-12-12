@@ -2,22 +2,68 @@
 
 {% block title %}Emprunter un livre{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/homePage/style.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Emprunter le livre "{{ book.titre }}"</h1>
+<header class="navbar" style="background-color: #ffc5c5; padding: 10px 20px;">
+    <div class="logo" style="display: inline-block;">
+        <span class="logo-icon" style="font-size: 1.5rem; color: #000;"></span>
+        <span class="logo-text" style="font-size: 1.5rem; font-weight: bold; color: #000;">BiblioVerse</span>
+    </div>
+    <nav style="display: inline-block; float: right;">
+        <a href="{{ path('home_contact') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Contact</a>
+        <a href="{{ path('signin') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Sign In</a>
+        <button class="signup-button" onclick="window.location.href='{{ path('signup') }}'" style="background-color: #000; color: #fff; border: none; padding: 10px 30px; cursor: pointer; font-size: 1rem; border-radius: 30px; transition: background-color 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            Sign Up
+        </button>
+    </nav>
+</header>
 
-    {{ form_start(form) }}
-        {{ form_row(form.nomEtudiant) }}
-        {{ form_row(form.prenomEtudiant) }}
-        {{ form_row(form.numCarteEtudiant) }}
-        {{ form_row(form.telephoneEtudiant) }}
-        {{ form_row(form.dateEmprunt) }}
-        {{ form_row(form.dateRetour) }}
-         {# Afficher le champ 'etat_retour' comme un choix #}
-         {{ form_row(form.etat_retour) }}
+<main class="borrow-book-page" style="background-color: #ffc5c5; color: #333; display: flex; justify-content: center; padding: 40px; min-height: 80vh;">
+    <section class="borrow-form-container" style="width: 100%; max-width: 800px; background-color: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);">
+        <h1 style="text-align: center; color: #000; font-size: 2rem; margin-bottom: 10px;">Emprunter le livre "{{ book.titre }}"</h1>
+        <p style="text-align: center; font-size: 1rem; color: #555; margin-bottom: 30px;">Veuillez remplir les informations pour emprunter ce livre</p>
 
-        <button type="submit" class="btn btn-danger">enregistrer</button>
-        
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.nomEtudiant, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Nom de l\'étudiant', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.prenomEtudiant, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Prénom de l\'étudiant', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.numCarteEtudiant, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Numéro de carte étudiant', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.telephoneEtudiant, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Téléphone de l\'étudiant', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.dateEmprunt, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Date d\'emprunt', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.dateRetour, {'label': false, 'attr': {'class': 'form-input form-control', 'placeholder': 'Date de retour', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div class="form-group" style="width: 100%; text-align: center;">
+                {{ form_row(form.etat_retour, {'label': false, 'attr': {'class': 'form-input form-control', 'style': 'padding: 12px; font-size: 1rem; width: 100%; background-color: #f7f7f7; border: 1px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin: 0 auto;'}}) }}
+            </div>
+            <div style="width: 100%; text-align: center;">
+                <button type="submit" class="btn btn-dark" style="background-color: #000; color: #fff; padding: 15px 20px; font-size: 1.1rem; border-radius: 30px; border: none; cursor: pointer; transition: background-color 0.3s ease; width: 100%; margin: 20px auto;">
+                    Enregistrer
+                </button>
+            </div>
+        {{ form_end(form) }}
+        <div style="width: 100%; text-align: center; margin-top: 30px;">
+            <a href="{{ path('book_list') }}" class="btn btn-secondary" style="background-color: #333; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 30px; transition: background-color 0.3s ease;">
+                Retour à la liste des livres
+            </a>
+        </div>
+    </section>
+</main>
 
-    <a href="{{ path('book_list') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+<footer style="background-color: #fff; padding: 30px 0; text-align: center; margin-top: 50px; border-top: 1px solid #ccc;">
+    <p style="color: #000; font-size: 1rem; margin-top: 30px;">@biblioVerse 2024. All rights reserved.</p>
+</footer>
+
 {% endblock %}

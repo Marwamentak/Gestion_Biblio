@@ -2,63 +2,85 @@
 
 {% block title %}Liste des livres{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/homePage/style.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Liste des livres</h1>
+<header class="navbar" style="background-color: #ffc5c5; padding: 10px 20px;">
+    <div class="logo" style="display: inline-block;">
+        <span class="logo-icon" style="font-size: 1.5rem; color: #000;"></span>
+        <span class="logo-text" style="font-size: 1.5rem; font-weight: bold; color: #000;">BiblioVerse</span>
+    </div>
+    <nav style="display: inline-block; float: right;">
+        <a href="{{ path('home_contact') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Contact</a>
+        <a href="{{ path('signin') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Sign In</a>
+        <button class="signup-button" onclick="window.location.href='{{ path('signup') }}'" style="background-color: #000; color: #fff; border: none; padding: 10px 30px; cursor: pointer; font-size: 1rem; border-radius: 30px; transition: background-color 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            Sign Up
+        </button>
+    </nav>
+</header>
 
-    {# Affichage des livres sous forme de tableau #}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>ISBN</th>
-                <th>Type</th>
-                <th>Éditeur</th>
-                <th>Année d'édition</th>
-                <th>État</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-                <tr>
-                    <td>{{ book.titre }}</td>
-                    <td>{{ book.isbn }}</td>
-                    <td>{{ book.type.value | capitalize }}</td>  {# Affiche le type en utilisant la valeur de l'énumération #}
-                    <td>{{ book.editeur }}</td>
-                    <td>{{ book.annee_edition }}</td>
-                    <td>{{ book.etat.value == 'disponible' ? 'Disponible' : 'Emprunté' }}</td>  {# Affiche l'état en texte #}
-                    <td>
-                        {# Ajouter des boutons ou liens pour les actions (voir, emprunter, modifier, etc.) #}
-                        <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">Modifier</a>
-                        
-                    </td>
-                    <td>
-                        
-                        <form method="post" action="{{ path('delete_book', {'id': book.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                    </td>
-                    <td>
-                        <!-- Bouton Borrow (Emprunter) -->
-                        {% if book.etat.value == 'disponible' %}
-                            <a href="{{ path('borrow', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
-                        {% else %}
-                            <span>Ce livre est déjà emprunté</span>
-                        {% endif %}
-                    </td>
-                    
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">Aucun livre trouvé.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<main class="book-list-page" style="background-color: #ffc5c5; color: #333; padding: 40px 20px; min-height: 80vh;">
+    <section class="book-list-table-container" style="width: 100%; max-width: 1200px; background-color: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin: 0 auto;">
+        <h1 style="text-align: center; font-size: 2rem; color: #000; margin-bottom: 30px;">Liste des livres</h1>
 
-    {# Lien pour ajouter un nouveau livre #}
-    <a href="{{ path('add_book') }}" class="btn btn-success">Ajouter un livre</a>
-    <a href="{{ path('borrowings') }}" class="btn btn-info">Voir mes emprunts</a>
-    
-    
+        <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #333; color: white;">
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">Titre</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">ISBN</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">Type</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">Éditeur</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">Année d'édition</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">État</th>
+                    <th style="padding: 12px 15px; font-size: 1rem; text-align: left;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 12px 15px; font-size: 1rem;">{{ book.titre }}</td>
+                        <td style="padding: 12px 15px; font-size: 1rem;">{{ book.isbn }}</td>
+                        <td style="padding: 12px 15px; font-size: 1rem;">{{ book.type.value | capitalize }}</td>
+                        <td style="padding: 12px 15px; font-size: 1rem;">{{ book.editeur }}</td>
+                        <td style="padding: 12px 15px; font-size: 1rem;">{{ book.annee_edition }}</td>
+                        <td style="padding: 12px 15px; font-size: 1rem;">
+                            {{ book.etat.value == 'disponible' ? 'Disponible' : 'Emprunté' }}
+                        </td>
+                        <td style="padding: 12px 15px; font-size: 1rem; display: flex; gap: 10px;">
+                            <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn" style="background-color: #000; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">Modifier</a>
+                            <form method="post" action="{{ path('delete_book', {'id': book.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');" style="display:inline;">
+                                <button type="submit" class="btn" style="background-color: #000; color: white; padding: 8px 16px; border: none; border-radius: 5px;">Supprimer</button>
+                            </form>
+                            {% if book.etat.value == 'disponible' %}
+                                <a href="{{ path('borrow', {'id': book.id}) }}" class="btn" style="background-color: #000; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">Emprunter</a>
+                            {% else %}
+                                <span style="color: #f44336;">Ce livre est déjà emprunté</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 20px;">Aucun livre trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ path('add_book') }}" class="btn" style="background-color: #000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-size: 1rem; transition: background-color 0.3s ease;">
+                Ajouter un livre
+            </a>
+            <a href="{{ path('borrowings') }}" class="btn" style="background-color: #000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-size: 1rem; transition: background-color 0.3s ease; margin-left: 10px;">
+                Voir mes emprunts
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer style="background-color: #fff; padding: 30px 0; text-align: center; margin-top: 50px; border-top: 1px solid #ccc;">
+    <p style="color: #000; font-size: 1rem; margin-top: 30px;">@biblioVerse 2024. All rights reserved.</p>
+</footer>
+
 {% endblock %}

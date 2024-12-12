@@ -16,12 +16,7 @@ security:
             lazy: true
             provider: app_user_provider
 
-            form_login:
-                    login_path: /signin
-                    check_path: /signin
-                    username_parameter: email
-                    password_parameter: password
-                    default_target_path: /book_list # Rediriger vers cette page après connexion
+            
 
             logout:
                 path: /logout
@@ -37,9 +32,9 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        # - { path: ^/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:

@@ -46,13 +46,15 @@ class UserController extends AbstractController
     #[Route('/signin', name: 'signin')]
     public function signIn(AuthenticationUtils $authenticationUtils): Response
     {
-        echo 'test';
-        die();
-        /*
+        
+        
         if ($this->getUser()) {
+            //die();
             return $this->redirectToRoute('book_list'); 
-            dd($this->getUser());
-        } */
+            //dd($this->getUser());
+            //dump($error);
+            //die();
+        } 
         
 
         $error = $authenticationUtils->getLastAuthenticationError();

@@ -2,20 +2,57 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/homePage/style.css') }}">
+{% endblock %}
+
 {% block body %}
-<div class="container text-center mt-5">
-    <h1>Bienvenue sur BiblioVerse</h1>
-    <p>Votre bibliothèque locale, réinventée pour être à portée de clic.</p>
-
-    <div class="mt-4">
-        <!-- Bouton vers la page Sign Up -->
-        <a href="{{ path('signup') }}" class="btn btn-primary mx-2">Sign Up</a>
-
-        <!-- Bouton vers la page Sign In -->
-        <a href="{{ path('signin') }}" class="btn btn-secondary mx-2">Sign In</a>
-
-        <!-- Bouton vers la page Contact -->
-        <a href="{{ path('home_contact') }}" class="btn btn-info mx-2">Contact</a>
+<header class="navbar" style="background-color: #ffc5c5; padding: 10px 20px;">
+    <div class="logo" style="display: inline-block;">
+        <span class="logo-icon" style="font-size: 1.5rem; color: #000;"></span>
+        <span class="logo-text" style="font-size: 1.5rem; font-weight: bold; color: #000;">BiblioVerse</span>
     </div>
-</div>
+    <nav style="display: inline-block; float: right;">
+        <a href="{{ path('home_contact') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Contact</a>
+        <a href="{{ path('signin') }}" class="nav-item" style="color: #000; text-decoration: none; margin-right: 15px;">Sign In</a>
+        <button class="signup-button" onclick="window.location.href='{{ path('signup') }}'" style="
+            background-color: #000; 
+            color: #fff; 
+            border: none; 
+            padding: 10px 30px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            border-radius: 30px; 
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        ">
+            Sign Up
+        </button>
+    </nav>
+</header>
+
+<main class="hero" style="display: flex; align-items: center; justify-content: space-between; padding: 20px; height: 70vh;">
+    <div class="hero-content" style="flex: 1; text-align: left;">
+        <h1 style="font-size: 2rem;">Votre bibliothèque locale, réinventée pour être à portée de clic.</h1>
+        <p style="font-size: 1.2rem; font-style: italic;">Explorez, empruntez, profitez — sans limites.</p>
+    </div>
+    <div class="hero-image" style="flex: 1; text-align: right;">
+        <img src="{{ asset('/homePage/books.png') }}" alt="Stack of books" style="max-width: 100%; height: auto;">
+    </div>
+</main>
+
+<footer class="stats" style="display: flex; justify-content: space-between; margin-top: -15px; padding: 20px; background-color: #fff;">
+    <div class="stat" style="flex: 1; text-align: left; padding-top: -5px;">
+        <h2>140+</h2>
+        <p>Livres</p>
+    </div>
+    <div class="stat" style="flex: 1; text-align: center; padding-top: -5px;">
+        <h2>30+</h2>
+        <p>Dictionnaires</p>
+    </div>
+    <div class="stat" style="flex: 1; text-align: right; padding-top: -5px;">
+        <h2>90+</h2>
+        <p>Magazines</p>
+    </div>
+</footer>
 {% endblock %}
